@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil de Jugador | TCG League Master{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
+            <div class="d-flex align-items-center gap-3 border-bottom pb-4 mb-4">
+                <div class="rounded-circle bg-dark text-warning p-3 text-center" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-person-badge fs-1"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold mb-1">{{ usuario.first_name }} {{ usuario.last_name }}</h3>
+                    <p class="text-muted mb-0">
+                        <span class="badge bg-dark text-warning me-2">@{{ usuario.username }}</span>
+                        {% if usuario.is_staff %}<span class="badge bg-info text-dark">Organizador / Juez Staff</span>{% else %}<span class="badge bg-secondary">Jugador Oficial</span>{% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <h5 class="fw-bold mb-3"><i class="bi bi-info-circle me-2 text-warning"></i>Datos de Cuenta</h5>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="p-3 bg-light rounded-3">
+                        <small class="text-muted d-block">Correo Electrónico:</small>
+                        <strong class="text-dark">{{ usuario.email }}</strong>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-light rounded-3">
+                        <small class="text-muted d-block">Fecha de Incorporación:</small>
+                        <strong class="text-dark">{{ usuario.date_joined|date:"d \d\e F \d\e Y" }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 mt-4 pt-3 border-top">
+                <a href="{% url 'catalogo:lista' %}" class="btn btn-warning fw-bold">
+                    <i class="bi bi-calendar3 me-1"></i>Explorar Torneos
+                </a>
+                <a href="{% url 'pedidos:ver' %}" class="btn btn-outline-dark">
+                    <i class="bi bi-ticket-perforated me-1"></i>Ver Mis Pre-Inscripciones
+                </a>
+                {% if usuario.is_staff %}
+                <a href="{% url 'catalogo:gestion' %}" class="btn btn-outline-info ms-auto">
+                    <i class="bi bi-shield-lock me-1"></i>Ir al Backoffice
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

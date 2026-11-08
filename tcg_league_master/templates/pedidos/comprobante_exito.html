@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Comprobante de Inscripción | TCG League Master{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white text-center mb-4">
+            <div class="mb-3">
+                <i class="bi bi-patch-check-fill text-success display-2"></i>
+            </div>
+            <h2 class="fw-bold mb-1">¡Inscripción Confirmada con Éxito!</h2>
+            <p class="text-muted mb-4">Tus cupos han sido reservados y asignados a tu cuenta de jugador.</p>
+
+            <div class="p-3 bg-light rounded-3 d-inline-block mx-auto mb-4 border">
+                <span class="text-muted small d-block">Código de Reserva Oficial:</span>
+                <strong class="fs-4 text-dark font-monospace">{{ codigo_reserva }}</strong>
+            </div>
+
+            <div class="text-start mt-2">
+                <h5 class="fw-bold mb-3 border-bottom pb-2">Detalle de Torneos Agendados</h5>
+                <ul class="list-group list-group-flush mb-4">
+                    {% for item in items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <div>
+                            <strong class="d-block">[{{ item.codigo }}] {{ item.nombre }}</strong>
+                            <small class="text-muted">{{ item.franquicia }} ({{ item.formato }}) | {{ item.fecha }}</small>
+                        </div>
+                        <span class="fw-bold text-dark">${{ item.subtotal|floatformat:0 }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="d-flex justify-content-between text-muted mb-1">
+                    <span>Subtotal:</span>
+                    <span>${{ subtotal|floatformat:0 }}</span>
+                </div>
+                <div class="d-flex justify-content-between text-muted mb-2">
+                    <span>Comisión de Juez / Sistema (5%):</span>
+                    <span>${{ recargo|floatformat:0 }}</span>
+                </div>
+                <div class="d-flex justify-content-between fs-5 fw-bold border-top pt-2">
+                    <span>Total Pagado / Agendado:</span>
+                    <span class="text-warning">${{ total|floatformat:0 }} CLP</span>
+                </div>
+            </div>
+
+            <div class="alert alert-info mt-4 text-start small">
+                <i class="bi bi-info-circle-fill me-1"></i>
+                <strong>Instrucciones:</strong> Preséntate el día del torneo indicando tu RUT y tu código de reserva (<strong>{{ codigo_reserva }}</strong>) en la mesa de control de jueces.
+            </div>
+
+            <div class="d-flex justify-content-center gap-2 mt-3">
+                <a href="{% url 'catalogo:lista' %}" class="btn btn-warning fw-bold px-4">Ir al Calendario</a>
+                <a href="{% url 'usuarios:perfil' %}" class="btn btn-outline-dark px-4">Ver Mi Perfil</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

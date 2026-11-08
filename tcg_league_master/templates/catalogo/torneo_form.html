@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }} | TCG League Master{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                <h3 class="fw-bold mb-0 text-dark">
+                    <i class="bi bi-pencil-square text-warning me-2"></i>{{ titulo }}
+                </h3>
+                <a href="{% url 'catalogo:gestion' %}" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-arrow-left me-1"></i>Volver a Gestión
+                </a>
+            </div>
+
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.non_field_errors %}
+                    <div>{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Código del Torneo *</label>
+                        {{ form.codigo }}
+                        {% if form.codigo.errors %}<div class="text-danger small">{{ form.codigo.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label fw-bold">Nombre del Evento *</label>
+                        {{ form.nombre }}
+                        {% if form.nombre.errors %}<div class="text-danger small">{{ form.nombre.errors.0 }}</div>{% endif %}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Franquicia TCG *</label>
+                        {{ form.franquicia }}
+                        {% if form.franquicia.errors %}<div class="text-danger small">{{ form.franquicia.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Formato de Juego *</label>
+                        {{ form.formato }}
+                        {% if form.formato.errors %}<div class="text-danger small">{{ form.formato.errors.0 }}</div>{% endif %}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Fecha y Hora de Inicio *</label>
+                        {{ form.fecha_evento }}
+                        {% if form.fecha_evento.errors %}<div class="text-danger small">{{ form.fecha_evento.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Sede / Ubicación *</label>
+                        {{ form.lugar }}
+                        {% if form.lugar.errors %}<div class="text-danger small">{{ form.lugar.errors.0 }}</div>{% endif %}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Tarifa Inscripción (CLP) *</label>
+                        {{ form.precio_inscripcion }}
+                        {% if form.precio_inscripcion.errors %}<div class="text-danger small">{{ form.precio_inscripcion.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Cupos Máximos (Aforo) *</label>
+                        {{ form.cupos_maximos }}
+                        {% if form.cupos_maximos.errors %}<div class="text-danger small">{{ form.cupos_maximos.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Cupos Disponibles *</label>
+                        {{ form.cupos_disponibles }}
+                        {% if form.cupos_disponibles.errors %}<div class="text-danger small">{{ form.cupos_disponibles.errors.0 }}</div>{% endif %}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Estado Operativo</label>
+                        {{ form.estado }}
+                        {% if form.estado.errors %}<div class="text-danger small">{{ form.estado.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Afiche / Banner (Imagen)</label>
+                        {{ form.afiche }}
+                        {% if form.afiche.errors %}<div class="text-danger small">{{ form.afiche.errors.0 }}</div>{% endif %}
+                    </div>
+
+                    <div class="col-12 pt-2">
+                        <div class="form-check form-check-inline">
+                            {{ form.destacado }}
+                            <label class="form-check-label fw-bold" for="{{ form.destacado.id_for_label }}">¿Marcar como Major / Destacado?</label>
+                        </div>
+                        <div class="form-check form-check-inline ms-3">
+                            {{ form.activo }}
+                            <label class="form-check-label fw-bold" for="{{ form.activo.id_for_label }}">¿Visible / Publicado en Catálogo?</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                    <a href="{% url 'catalogo:gestion' %}" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-warning fw-bold px-4">{{ accion }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

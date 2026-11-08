@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Iniciar Sesión | TCG League Master{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+            <div class="text-center mb-4">
+                <div class="rounded-circle bg-dark d-inline-flex p-3 text-warning mb-2">
+                    <i class="bi bi-person-fill-lock fs-2"></i>
+                </div>
+                <h3 class="fw-bold mb-1">Acceso de Jugadores</h3>
+                <p class="text-muted small">Ingresa con tus credenciales registradas.</p>
+            </div>
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger small">
+                    {% for error in form.non_field_errors %}
+                    <div>{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold small">Nombre de Usuario (Nick)</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}<div class="text-danger small">{{ form.username.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold small">Contraseña</label>
+                    {{ form.password }}
+                    {% if form.password.errors %}<div class="text-danger small">{{ form.password.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-warning fw-bold py-2">Ingresar a la Plataforma</button>
+                </div>
+
+                <div class="text-center small text-muted">
+                    ¿No tienes una cuenta aún? <a href="{% url 'usuarios:registro' %}" class="fw-bold text-dark">Registrarse aquí</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

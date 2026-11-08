@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Reglamento & Liga | TCG League Master{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
+            <h2 class="fw-bold text-dark mb-3"><i class="bi bi-shield-check text-warning me-2"></i>Reglamento y Código de Conducta</h2>
+            <p class="text-muted">
+                <strong>TCG League Master</strong> es la plataforma de gestión y coordinación competitiva para eventos de cartas coleccionables. 
+                Fomentamos el juego limpio, la deportividad y la inclusión en cada una de nuestras fechas.
+            </p>
+            <hr>
+            <h5 class="fw-bold mt-4"><i class="bi bi-1-circle text-primary me-2"></i>Puntualidad e Inscripciones</h5>
+            <p class="text-secondary small">
+                Los jugadores que hayan pre-reservado su cupo a través de la plataforma deben confirmar su presencia en mesa de jueces al menos 15 minutos antes de la hora de inicio del torneo.
+            </p>
+
+            <h5 class="fw-bold mt-4"><i class="bi bi-2-circle text-primary me-2"></i>Listas de Mazos (Decklists)</h5>
+            <p class="text-secondary small">
+                Para torneos de categoría <em>Major</em> o competitivos (Tier 2 o superior), la entrega de mazo validado en papel o formato digital es de carácter obligatorio antes de la ronda 1.
+            </p>
+
+            <h5 class="fw-bold mt-4"><i class="bi bi-3-circle text-primary me-2"></i>Conducta y Fair Play</h5>
+            <p class="text-secondary small">
+                Cualquier conducta antideportiva, falta de respeto hacia oponentes, jueces o público general resultará en advertencia, pérdida de juego o descalificación inmediata sin derecho a reembolso.
+            </p>
+
+            <h5 class="fw-bold mt-4"><i class="bi bi-4-circle text-primary me-2"></i>Cuidado de Accesorios y Material</h5>
+            <p class="text-secondary small">
+                Es responsabilidad de cada jugador portar fundas opacas en buen estado, contadores, dados y tapete de juego.
+            </p>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+            <h4 class="fw-bold mb-3"><i class="bi bi-geo-alt-fill text-danger me-2"></i>Sede Principal de Torneos</h4>
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-building display-6 text-muted"></i>
+                <div>
+                    <h6 class="fw-bold mb-1">Sucursal Central Santiago</h6>
+                    <p class="text-muted mb-0 small">Av. Providencia 1234, Local 45, Santiago, Chile.</p>
+                    <p class="text-muted mb-0 small"><i class="bi bi-telephone me-1"></i>Contacto: +56 9 8765 4321 | torneos@tcgleague.cl</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra lateral con Franquicias registradas -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
+            <h5 class="fw-bold text-dark mb-3"><i class="bi bi-controller text-warning me-2"></i>Juegos Soportados</h5>
+            <div class="list-group list-group-flush">
+                {% for franq in franquicias %}
+                <div class="list-group-item px-0 py-3">
+                    <h6 class="fw-bold mb-1 text-primary">{{ franq.nombre }}</h6>
+                    <small class="text-muted d-block mb-1"><strong>Editorial:</strong> {{ franq.editorial }}</small>
+                    <p class="small text-secondary mb-0">{{ franq.descripcion }}</p>
+                </div>
+                {% empty %}
+                <p class="text-muted small">No hay franquicias registradas.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card bg-dark text-white rounded-4 p-4 text-center">
+            <i class="bi bi-envelope-paper display-5 text-warning mb-2"></i>
+            <h5 class="fw-bold">¿Dudas con un torneo?</h5>
+            <p class="small text-light opacity-75 mb-3">Escríbele a nuestro cuerpo arbitral y juez principal.</p>
+            <a href="mailto:jueces@tcgleague.cl" class="btn btn-warning btn-sm fw-bold">Contactar a un Juez</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
