@@ -112,8 +112,8 @@
                             {% endif %}
                         </div>
                         <div class="d-grid gap-2 mt-3">
-                            <a href="{% url 'catalogo:detalle' torneo.slug %}" class="btn btn-outline-dark btn-sm">
-                                <i class="bi bi-info-circle me-1"></i>Ver Ficha Torneo
+                            <a href="{% url 'catalogo:detalle' torneo.slug %}" class="btn btn-ficha btn-sm">
+                                <i class="bi bi-eye-fill me-1"></i>Ver ficha del torneo
                             </a>
                             {% if torneo.hay_cupos %}
                             <a href="{% url 'inscripcion:agregar' torneo.id %}" class="btn btn-warning btn-sm fw-semibold">

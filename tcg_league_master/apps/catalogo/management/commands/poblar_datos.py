@@ -12,11 +12,11 @@ class Command(BaseCommand):
         # 1. Crear usuarios de prueba (Admin y Estándar)
         if not User.objects.filter(username="admin").exists():
             User.objects.create_superuser("admin", "admin@tcgleague.cl", "admin")
-            self.stdout.write(self.style.SUCCESS("✓ Superusuario 'admin' creado (Clave: admin)."))
+            self.stdout.write(self.style.SUCCESS("OK: Superusuario 'admin' creado (Clave: admin)."))
 
         if not User.objects.filter(username="jugador1").exists():
             User.objects.create_user("jugador1", "jugador1@tcgleague.cl", "jugador123", first_name="Pedro", last_name="Soto")
-            self.stdout.write(self.style.SUCCESS("✓ Usuario estándar 'jugador1' creado."))
+            self.stdout.write(self.style.SUCCESS("OK: Usuario estándar 'jugador1' creado."))
 
         # 2. Crear Franquicias de Contexto
         franquicias_data = [
@@ -51,4 +51,4 @@ class Command(BaseCommand):
                 'destacado': dest, 'estado': 'programado', 'activo': True
             })
 
-        self.stdout.write(self.style.SUCCESS("✓ Datos iniciales de TCG League Master cargados correctamente."))
+        self.stdout.write(self.style.SUCCESS("OK: Datos iniciales de TCG League Master cargados correctamente."))

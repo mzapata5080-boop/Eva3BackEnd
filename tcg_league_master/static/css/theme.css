@@ -1,19 +1,15 @@
-/* ==========================================================================
-   TCG League Master CL - Dark Pokémon Theme (Charmander Red & Pikachu Yellow)
-   ========================================================================== */
-
 :root {
-    --bg-dark-primary: #0f1013;
-    --bg-dark-secondary: #181a20;
-    --bg-dark-card: #20232b;
-    --bg-dark-hover: #2a2e39;
+    --bg-dark-primary: #444444;
+    --bg-dark-secondary: #444444;
+    --bg-dark-card: #444444;
+    --bg-dark-hover: #515151;
     --charmander-red: #ff4a22;
     --charmander-red-hover: #e53c15;
     --pikachu-yellow: #ffcb05;
     --pikachu-yellow-dark: #e6b700;
-    --text-primary: #f5f6f8;
-    --text-muted: #a0a6b5;
-    --border-dark: #2d323e;
+    --text-primary: #ffffff;
+    --text-muted: #e2e2e2;
+    --border-dark: #858585;
     --border-accent: rgba(255, 203, 5, 0.25);
 }
 
@@ -24,7 +20,6 @@ body {
     min-height: 100vh;
 }
 
-/* Navbar */
 .navbar-tcg {
     background-color: var(--bg-dark-secondary) !important;
     border-bottom: 2px solid var(--border-dark);
@@ -59,13 +54,20 @@ body {
     color: var(--pikachu-yellow) !important;
 }
 
-/* Headings & Texts */
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
 }
 
 .text-dark {
+    color: #ffffff !important;
+}
+
+.text-light {
     color: var(--text-primary) !important;
+}
+
+.bg-dark {
+    background-color: #555555 !important;
 }
 
 .text-muted {
@@ -80,7 +82,6 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--charmander-red) !important;
 }
 
-/* Cards */
 .card, .card.bg-white {
     background-color: var(--bg-dark-card) !important;
     border: 1px solid var(--border-dark) !important;
@@ -100,14 +101,12 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1.5rem;
 }
 
-/* Hero Section */
 .hero-tcg {
-    background: linear-gradient(135deg, #181a20 0%, #20171a 50%, #151821 100%);
+    background: linear-gradient(135deg, #444444 0%, #4d4d4d 50%, #3d3d3d 100%);
     border: 1px solid var(--border-dark);
     border-top: 3px solid var(--charmander-red);
 }
 
-/* Badges */
 .badge-hoy {
     background-color: var(--charmander-red) !important;
     color: #fff !important;
@@ -129,7 +128,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
 
-/* Buttons */
 .btn-primary, .btn-charmander {
     background-color: var(--charmander-red) !important;
     border-color: var(--charmander-red) !important;
@@ -166,6 +164,39 @@ h1, h2, h3, h4, h5, h6 {
     color: #121316 !important;
 }
 
+.btn-ficha {
+    background-color: transparent !important;
+    border: 1px solid #bdbdbd !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-ficha:hover,
+.btn-ficha:focus-visible {
+    background-color: var(--pikachu-yellow) !important;
+    border-color: var(--pikachu-yellow) !important;
+    color: #222222 !important;
+    transform: translateY(-1px);
+}
+
+.btn-profile {
+    background-color: transparent !important;
+    border: 1px solid #bdbdbd !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-profile:hover,
+.btn-profile:focus-visible {
+    background-color: var(--charmander-red) !important;
+    border-color: var(--charmander-red) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
 .btn-outline-light {
     border-color: var(--border-dark) !important;
     color: var(--text-primary) !important;
@@ -175,7 +206,6 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--bg-dark-hover) !important;
 }
 
-/* Tournament Row Item in Column */
 .tournament-row-item {
     display: flex;
     justify-content: space-between;
@@ -203,9 +233,8 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.5px;
 }
 
-/* Forms & Inputs */
 .form-control, .form-select {
-    background-color: var(--bg-dark-secondary) !important;
+    background-color: #444444 !important;
     border: 1px solid var(--border-dark) !important;
     color: var(--text-primary) !important;
 }
@@ -219,7 +248,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #6c757d !important;
 }
 
-/* Tables */
 .table {
     color: var(--text-primary) !important;
     border-color: var(--border-dark) !important;
@@ -231,7 +259,6 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary) !important;
 }
 
-/* Dropdown */
 .dropdown-menu {
     background-color: var(--bg-dark-card) !important;
     border: 1px solid var(--border-dark) !important;
@@ -246,7 +273,82 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--pikachu-yellow) !important;
 }
 
-/* Footer */
+.card[style*="background: linear-gradient"] {
+    background: linear-gradient(135deg, #444444 0%, #4d4d4d 100%) !important;
+}
+
+.card .bg-dark[style] {
+    background: radial-gradient(circle, #4d4d4d 0%, #3d3d3d 100%) !important;
+}
+
+.bg-white {
+    background-color: #444444 !important;
+}
+
+.reservation-code {
+    background: linear-gradient(135deg, #555555 0%, #333333 100%) !important;
+    border: 2px solid var(--pikachu-yellow) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.reservation-code-value {
+    color: var(--pikachu-yellow) !important;
+    letter-spacing: 1px;
+}
+
+.account-detail {
+    background-color: #555555 !important;
+    border: 1px solid #707070;
+}
+
+.account-detail small {
+    color: #d8d8d8 !important;
+}
+
+.account-detail strong {
+    color: #ffffff !important;
+}
+
+.list-group-item {
+    background-color: #555555 !important;
+    border-color: #858585 !important;
+    color: #ffffff !important;
+}
+
+.list-group-item .text-dark {
+    color: #ffffff !important;
+}
+
+.supported-games-list .list-group-item {
+    background-color: #444444 !important;
+    border-color: #707070 !important;
+}
+
+.btn-outline-secondary {
+    border-color: #aeb4bb !important;
+    color: #ffffff !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #757575 !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+.card .bg-dark.bg-opacity-50 {
+    background-color: #555555 !important;
+    border-color: #888888 !important;
+}
+
+.card .text-secondary,
+.card .text-muted {
+    color: #ededed !important;
+}
+
+.card .bg-dark.bg-opacity-50 .text-secondary {
+    color: #f2f2f2 !important;
+}
+
 footer {
     background-color: var(--bg-dark-secondary) !important;
     border-top: 1px solid var(--border-dark);

@@ -12,9 +12,9 @@
             <h2 class="fw-bold mb-1">¡Inscripción Confirmada con Éxito!</h2>
             <p class="text-muted mb-4">Tus cupos han sido reservados y asignados a tu cuenta de jugador.</p>
 
-            <div class="p-3 bg-light rounded-3 d-inline-block mx-auto mb-4 border">
+            <div class="reservation-code p-3 rounded-3 d-inline-block mx-auto mb-4">
                 <span class="text-muted small d-block">Código de Reserva Oficial:</span>
-                <strong class="fs-4 text-dark font-monospace">{{ codigo_reserva }}</strong>
+                <strong class="reservation-code-value fs-4 font-monospace">{{ codigo_reserva }}</strong>
             </div>
 
             <div class="text-start mt-2">
@@ -52,7 +52,9 @@
 
             <div class="d-flex justify-content-center gap-2 mt-3">
                 <a href="{% url 'catalogo:lista' %}" class="btn btn-warning fw-bold px-4">Ir al Calendario</a>
-                <a href="{% url 'usuarios:perfil' %}" class="btn btn-outline-dark px-4">Ver Mi Perfil</a>
+                <a href="{% url 'usuarios:perfil' %}" class="btn btn-profile px-4">
+                    <i class="bi bi-person-circle me-1"></i>Ver Mi Perfil
+                </a>
             </div>
         </div>
     </div>
