@@ -49,7 +49,7 @@
                         <span class="input-group-text bg-white border-end-0"><i
                                 class="bi bi-search text-muted"></i></span>
                         <input type="text" name="q" class="form-control border-start-0"
-                            placeholder="Buscar torneo, código (Ej: MTG-01) o formato..." value="{{ query_actual }}">
+                            placeholder="Buscar torneo, sede (La Ira, Suna Senso, Rey Mago) o formato..." value="{{ query_actual }}">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -116,7 +116,7 @@
                                 <i class="bi bi-info-circle me-1"></i>Ver Ficha Torneo
                             </a>
                             {% if torneo.hay_cupos %}
-                            <a href="{% url 'pedidos:agregar' torneo.id %}" class="btn btn-warning btn-sm fw-semibold">
+                            <a href="{% url 'inscripcion:agregar' torneo.id %}" class="btn btn-warning btn-sm fw-semibold">
                                 <i class="bi bi-ticket-plus me-1"></i>Pre-Inscribirme
                             </a>
                             {% endif %}

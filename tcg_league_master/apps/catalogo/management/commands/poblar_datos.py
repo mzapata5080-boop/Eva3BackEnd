@@ -20,8 +20,9 @@ class Command(BaseCommand):
 
         # 2. Crear Franquicias de Contexto
         franquicias_data = [
-            ("Magic: The Gathering", "Wizards of the Coast", "Juego de estrategia coleccionable pionero."),
             ("Pokémon TCG", "The Pokémon Company", "Torneos oficiales de cartas Pokémon."),
+            ("One Piece Card Game", "Bandai", "Torneos oficiales del juego de cartas de One Piece."),
+            ("Magic: The Gathering", "Wizards of the Coast", "Juego de estrategia coleccionable pionero."),
             ("Dragon Ball Super Card Game", "Bandai", "Batallas de ritmo rápido con guerreros Z."),
             ("Yu-Gi-Oh! TCG", "Konami", "Duelos de monstruos, magia y trampas."),
         ]
@@ -31,19 +32,21 @@ class Command(BaseCommand):
             f, _ = FranquiciaTCG.objects.get_or_create(nombre=nombre, defaults={'editorial': ed, 'descripcion': desc})
             franq_map[nombre] = f
 
-        # 3. Crear Torneos Principales
+        # 3. Crear Torneos Principales en Chillán (La Ira, Suna Senso, Rey Mago)
         ahora = timezone.now()
         torneos_data = [
-            ("MTG-CMD-01", "Torneo Commander FNM", franq_map["Magic: The Gathering"], "Commander / EDH", ahora + timedelta(days=2), 5000, 32, 28, True),
-            ("PKM-STD-01", "League Cup Pokémon Standard", franq_map["Pokémon TCG"], "Standard", ahora + timedelta(days=5), 8000, 24, 12, True),
-            ("DBS-ADV-01", "Dragon Ball Championship Qualifier", franq_map["Dragon Ball Super Card Game"], "Constructed Advanced", ahora + timedelta(days=7), 10000, 16, 16, False),
-            ("YGO-ADV-02", "Locals Yu-Gi-Oh! Dual Sunday", franq_map["Yu-Gi-Oh! TCG"], "Advanced Format", ahora + timedelta(days=9), 4000, 20, 15, False),
+            ("PKM-CHI-01", "League Cup Pokémon Standard", franq_map["Pokémon TCG"], "Standard", ahora + timedelta(days=2), "La Ira (Chillán)", 6000, 32, 28, True),
+            ("OPC-CHI-01", "Store Tournament One Piece", franq_map["One Piece Card Game"], "Standard", ahora + timedelta(days=3), "Suna Senso (Chillán)", 5000, 24, 20, True),
+            ("MTG-CHI-01", "Torneo Commander FNM", franq_map["Magic: The Gathering"], "Commander / EDH", ahora + timedelta(days=5), "Rey Mago (Chillán)", 5000, 32, 26, True),
+            ("PKM-CHI-02", "Liga Pokémon Gym Battle", franq_map["Pokémon TCG"], "Expanded", ahora + timedelta(days=6), "Suna Senso (Chillán)", 4000, 20, 16, False),
+            ("YGO-CHI-01", "Locals Yu-Gi-Oh! Chillán", franq_map["Yu-Gi-Oh! TCG"], "Advanced Format", ahora + timedelta(days=8), "La Ira (Chillán)", 4500, 24, 18, False),
+            ("OPC-CHI-02", "Flagship Qualifier One Piece", franq_map["One Piece Card Game"], "Standard", ahora + timedelta(days=10), "Rey Mago (Chillán)", 7000, 32, 30, False),
         ]
 
-        for cod, nom, franq, form, fecha, prec, max_c, disp_c, dest in torneos_data:
-            TorneoTCG.objects.get_or_create(codigo=cod, defaults={
+        for cod, nom, franq, form, fecha, lug, prec, max_c, disp_c, dest in torneos_data:
+            TorneoTCG.objects.update_or_create(codigo=cod, defaults={
                 'nombre': nom, 'franquicia': franq, 'formato': form, 
-                'fecha_evento': fecha, 'precio_inscripcion': prec, 
+                'fecha_evento': fecha, 'lugar': lug, 'precio_inscripcion': prec, 
                 'cupos_maximos': max_c, 'cupos_disponibles': disp_c, 
                 'destacado': dest, 'estado': 'programado', 'activo': True
             })

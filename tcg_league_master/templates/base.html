@@ -1,46 +1,91 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}TCG League Master{% endblock %}</title>
+    <title>{% block title %}TCG League Master CL | Chillán{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet">
 </head>
-
-<body class="bg-light d-flex flex-column min-vh-100">
-
-    <!-- Navbar Responsivo -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm py-3">
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar estilo TorneosTCG -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-tcg sticky-top py-2">
         <div class="container">
-            <a class="navbar-brand fw-bold text-warning fs-4" href="{% url 'core:inicio' %}">
-                <i class="bi bi-suit-spade-fill me-2"></i>TCG League Master
+            <a class="navbar-brand navbar-brand-logo me-3" href="{% url 'core:inicio' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" height="38" style="vertical-align: middle;">
+                  <defs>
+                    <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ff6b3d" />
+                      <stop offset="100%" stop-color="#d92400" />
+                    </linearGradient>
+                    <linearGradient id="gradYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffe600" />
+                      <stop offset="100%" stop-color="#ffaa00" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="6" y="8" width="30" height="42" rx="4" fill="url(#gradRed)" transform="rotate(-10 20 28)" stroke="#ff9266" stroke-width="1.5"/>
+                  <circle cx="19" cy="27" r="6" fill="#fff" opacity="0.3"/>
+                  <rect x="22" y="6" width="30" height="42" rx="4" fill="url(#gradYellow)" transform="rotate(8 36 26)" stroke="#fff" stroke-width="1.5"/>
+                  <path d="M 37 16 L 31 28 L 37 28 L 33 38 L 44 26 L 37 26 Z" fill="#d92400"/>
+                  <text x="65" y="27" font-family="'Impact', 'Arial Black', sans-serif" font-size="20" font-weight="900" fill="#ffcb05" letter-spacing="1">TCG LEAGUE</text>
+                  <text x="65" y="47" font-family="'Trebuchet MS', 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#ff4a22" letter-spacing="2">MASTER <tspan fill="#ffffff" font-size="11" font-weight="700">CL</tspan></text>
+                </svg>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+
+            <!-- Selector de Ciudad / Región (Chillán) -->
+            <div class="dropdown me-3 d-none d-sm-block">
+                <button class="btn region-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-geo-alt-fill text-danger me-1"></i> Chillán (Ñuble)
+                </button>
+                <ul class="dropdown-menu shadow">
+                    <li><h6 class="dropdown-header text-warning">Comunidad Oficial</h6></li>
+                    <li><span class="dropdown-item active"><i class="bi bi-check2 text-warning me-2"></i>Chillán, Región de Ñuble</span></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><span class="dropdown-item text-secondary"><i class="bi bi-shop me-2"></i>La Ira</span></li>
+                    <li><span class="dropdown-item text-secondary"><i class="bi bi-controller me-2"></i>Suna Senso</span></li>
+                    <li><span class="dropdown-item text-secondary"><i class="bi bi-dice-5 me-2"></i>Rey Mago</span></li>
+                </ul>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="menu">
+
+            <div class="collapse navbar-collapse" id="menuNavbar">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'core:inicio' %}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'catalogo:lista' %}">Calendario de Torneos</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:inicio' %}">
+                            <i class="bi bi-house-door me-1"></i> Inicio
+                        </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'core:nosotros' %}">Reglamento & Liga</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'catalogo:lista' %}">
+                            <i class="bi bi-calendar-event me-1"></i> Torneos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:nosotros' %}">
+                            <i class="bi bi-shop me-1"></i> Tiendas &amp; Sedes
+                        </a>
+                    </li>
                     {% if user.is_staff %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-info" href="#"
-                            data-bs-toggle="dropdown">Organización</a>
+                        <a class="nav-link dropdown-toggle text-warning" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear-wide-connected me-1"></i> Gestión
+                        </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'catalogo:gestion' %}">Backoffice de Torneos</a>
-                            </li>
-                            <li><a class="dropdown-item" href="{% url 'catalogo:crear' %}">Crear Nuevo Evento</a></li>
+                            <li><a class="dropdown-item" href="{% url 'catalogo:gestion' %}">Backoffice de Torneos</a></li>
+                            <li><a class="dropdown-item" href="{% url 'catalogo:crear' %}">Crear Nuevo Torneo</a></li>
                         </ul>
                     </li>
                     {% endif %}
                 </ul>
-                <div class="d-flex align-items-center gap-3">
-                    <a href="{% url 'pedidos:ver' %}" class="btn btn-outline-warning position-relative">
-                        <i class="bi bi-ticket-perforated"></i> Pre-Inscripciones
+
+                <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+                    <a href="{% url 'inscripcion:ver' %}" class="btn btn-outline-warning position-relative btn-sm px-3">
+                        <i class="bi bi-ticket-perforated me-1"></i> Pre-Inscripción
                         {% if inscripciones_total_items > 0 %}
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ inscripciones_total_items }}
@@ -48,18 +93,20 @@
                         {% endif %}
                     </a>
                     {% if user.is_authenticated %}
-                    <a href="{% url 'usuarios:perfil' %}" class="btn btn-secondary btn-sm">{{ user.username }}</a>
+                    <a href="{% url 'usuarios:perfil' %}" class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-person-fill text-warning me-1"></i>{{ user.username }}
+                    </a>
                     <a href="{% url 'usuarios:logout' %}" class="btn btn-outline-danger btn-sm">Salir</a>
                     {% else %}
                     <a href="{% url 'usuarios:login' %}" class="btn btn-outline-light btn-sm">Ingresar</a>
-                    <a href="{% url 'usuarios:registro' %}" class="btn btn-warning btn-sm fw-semibold">Registrarse</a>
+                    <a href="{% url 'usuarios:registro' %}" class="btn btn-warning btn-sm fw-bold">Registrarse</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Sistema de Mensajes Flash -->
+    <!-- Flash messages -->
     <div class="container mt-3">
         {% if messages %}
         {% for message in messages %}
@@ -71,17 +118,23 @@
         {% endif %}
     </div>
 
+    <!-- Contenido Principal -->
     <main class="container my-4 flex-grow-1">
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-dark text-white py-4 mt-auto">
+    <!-- Footer -->
+    <footer class="py-4 mt-auto">
         <div class="container text-center">
-            <small>&copy; 2026 TCG League Master - Plataforma de Gestión de Torneos Oficiales.</small>
+            <div class="d-flex justify-content-center align-items-center gap-3 mb-2">
+                <span class="badge bg-dark border border-secondary text-warning">Chillán, Ñuble</span>
+                <span class="text-secondary">•</span>
+                <span class="text-secondary small">Sedes: La Ira | Suna Senso | Rey Mago</span>
+            </div>
+            <small class="text-muted">&copy; 2026 TCG League Master CL - Plataforma de Torneos TCG Oficiales en Chillán.</small>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

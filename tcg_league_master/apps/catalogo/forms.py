@@ -16,7 +16,7 @@ class TorneoTCGForm(forms.ModelForm):
             'franquicia': forms.Select(attrs={'class': 'form-select'}),
             'formato': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Commander / EDH'}),
             'fecha_evento': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
-            'lugar': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Sucursal Central - Santiago'}),
+            'lugar': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Tienda La Ira - Chillán'}),
             'precio_inscripcion': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
             'cupos_maximos': forms.NumberInput(attrs={'class': 'form-control', 'min': 4}),
             'cupos_disponibles': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),

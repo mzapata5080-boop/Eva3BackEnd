@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(blank=True, max_length=220, unique=True)),
                 ('formato', models.CharField(max_length=100, verbose_name='Formato de Juego (Ej: Commander, Standard, Modern, Advanced)')),
                 ('fecha_evento', models.DateTimeField(verbose_name='Fecha y Hora de Inicio')),
-                ('lugar', models.CharField(default='Sucursal Central - Santiago', max_length=200, verbose_name='Sede / Ubicación')),
+                ('lugar', models.CharField(default='Tienda La Ira - Chillán', max_length=200, verbose_name='Sede / Ubicación')),
                 ('precio_inscripcion', models.DecimalField(decimal_places=0, max_digits=10, validators=[django.core.validators.MinValueValidator(0)], verbose_name='Tarifa Inscripción (CLP)')),
                 ('cupos_maximos', models.PositiveIntegerField(default=16, validators=[django.core.validators.MinValueValidator(4)], verbose_name='Cupos Máximos (Aforo)')),
                 ('cupos_disponibles', models.PositiveIntegerField(verbose_name='Cupos Disponibles')),

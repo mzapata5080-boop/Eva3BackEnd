@@ -11,7 +11,7 @@
                     <i class="bi bi-ticket-perforated-fill text-warning me-2"></i>Mis Pre-Inscripciones
                 </h3>
                 {% if not esta_vacio %}
-                <a href="{% url 'pedidos:limpiar' %}" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Deseas vaciar todas las pre-inscripciones?');">
+                <a href="{% url 'inscripcion:limpiar' %}" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Deseas vaciar todas las pre-inscripciones?');">
                     <i class="bi bi-trash me-1"></i>Vaciar Selección
                 </a>
                 {% endif %}
@@ -45,7 +45,7 @@
                             <span class="fs-5 fw-bold text-dark">${{ item.subtotal|floatformat:0 }}</span>
                             <small class="d-block text-muted">1 cupo jugador</small>
                         </div>
-                        <a href="{% url 'pedidos:eliminar' item.id %}" class="btn btn-outline-danger btn-sm" title="Quitar cupo">
+                        <a href="{% url 'inscripcion:eliminar' item.id %}" class="btn btn-outline-danger btn-sm" title="Quitar cupo">
                             <i class="bi bi-x-lg"></i>
                         </a>
                     </div>
@@ -76,11 +76,11 @@
 
             {% if not esta_vacio %}
                 {% if user.is_authenticated %}
-                <a href="{% url 'pedidos:confirmar' %}" class="btn btn-warning w-100 fw-bold py-2 mb-2">
+                <a href="{% url 'inscripcion:confirmar' %}" class="btn btn-warning w-100 fw-bold py-2 mb-2">
                     <i class="bi bi-check-circle-fill me-1"></i>Confirmar Pre-Inscripción
                 </a>
                 {% else %}
-                <a href="{% url 'usuarios:login' %}?next={% url 'pedidos:ver' %}" class="btn btn-primary w-100 fw-bold py-2 mb-2">
+                <a href="{% url 'usuarios:login' %}?next={% url 'inscripcion:ver' %}" class="btn btn-primary w-100 fw-bold py-2 mb-2">
                     <i class="bi bi-box-arrow-in-right me-1"></i>Inicia Sesión para Confirmar
                 </a>
                 <small class="text-muted text-center d-block">Debes tener cuenta de jugador para reservar tu cupo oficial.</small>

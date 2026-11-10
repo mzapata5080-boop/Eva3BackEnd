@@ -33,7 +33,7 @@
 
                 <h2 class="fw-bold mb-3 text-dark">{{ torneo.nombre }}</h2>
 
-                <div class="row g-3 py-3 border-top border-bottom my-3 bg-light rounded-3 px-2">
+                <div class="row g-3 py-3 border-top border-bottom my-3 bg-dark bg-opacity-50 border border-secondary border-opacity-25 rounded-3 px-2">
                     <div class="col-md-6">
                         <small class="text-muted d-block">Fecha y Hora:</small>
                         <strong class="fs-6"><i class="bi bi-calendar3 me-1 text-primary"></i>{{ torneo.fecha_evento|date:"l, d \d\e F \d\e Y - H:i" }} hrs.</strong>
@@ -65,7 +65,7 @@
 
                 <div class="d-flex flex-wrap gap-2 mt-4 pt-3 border-top">
                     {% if torneo.hay_cupos %}
-                    <a href="{% url 'pedidos:agregar' torneo.id %}" class="btn btn-warning btn-lg fw-bold px-4">
+                    <a href="{% url 'inscripcion:agregar' torneo.id %}" class="btn btn-warning btn-lg fw-bold px-4">
                         <i class="bi bi-ticket-plus me-2"></i>Pre-Inscribirme a este Torneo
                     </a>
                     {% else %}

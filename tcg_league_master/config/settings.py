@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # Apps del proyecto
     'apps.core',
     'apps.catalogo',
-    'apps.pedidos',
+    'apps.inscripcion',
     'apps.usuarios',
 ]
 
@@ -67,7 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'apps.pedidos.context_processors.inscripciones_context',
+                'apps.inscripcion.context_processors.inscripciones_context',
             ],
         },
     },
@@ -111,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-cl'
 
+# Zona horaria oficial para Chile continental (Chillán / Santiago)
 TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True

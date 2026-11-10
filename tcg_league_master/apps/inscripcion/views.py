@@ -15,7 +15,7 @@ def inscripcion_ver(request):
     subtotal = sum(item['subtotal'] for item in inscripciones.values())
     recargo_servicio = int(subtotal * 0.05) # 5% recargo por comisión de juez/sistema
     total = subtotal + recargo_servicio
-    return render(request, 'pedidos/inscripciones.html', {
+    return render(request, 'inscripcion/inscripciones.html', {
         'items': inscripciones.values(),
         'subtotal': subtotal,
         'recargo_servicio': recargo_servicio,
@@ -53,7 +53,7 @@ def inscripcion_agregar(request, id):
         request.session.modified = True
         messages.success(request, f"Te has pre-inscrito temporalmente a '{torneo.nombre}'.")
 
-    return redirect(request.META.get('HTTP_REFERER') or 'pedidos:ver')
+    return redirect(request.META.get('HTTP_REFERER') or 'inscripcion:ver')
 
 
 def inscripcion_eliminar(request, id):
@@ -63,14 +63,14 @@ def inscripcion_eliminar(request, id):
         del inscripciones[str_id]
         request.session.modified = True
         messages.warning(request, "Pre-inscripción removida.")
-    return redirect('pedidos:ver')
+    return redirect('inscripcion:ver')
 
 
 def inscripcion_limpiar(request):
     if 'inscripciones' in request.session:
         del request.session['inscripciones']
         request.session.modified = True
-    return redirect('pedidos:ver')
+    return redirect('inscripcion:ver')
 
 
 @login_required
@@ -98,7 +98,7 @@ def resumen_confirmacion(request):
     del request.session['inscripciones']
     request.session.modified = True
 
-    return render(request, 'pedidos/comprobante_exito.html', {
+    return render(request, 'inscripcion/comprobante_exito.html', {
         'items': items_confirmados,
         'subtotal': subtotal,
         'recargo': recargo_servicio,

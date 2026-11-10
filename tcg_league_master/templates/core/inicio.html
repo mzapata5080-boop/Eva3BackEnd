@@ -1,29 +1,126 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Inicio | TCG League Master{% endblock %}
+{% block title %}Inicio | TCG League Master CL - Chillán{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<div class="p-5 mb-4 bg-dark text-white rounded-4 shadow-sm position-relative overflow-hidden">
-    <div class="row align-items-center py-3">
-        <div class="col-lg-8">
-            <span class="badge bg-warning text-dark fw-bold px-3 py-2 mb-3">TEMPORADA OFICIAL 2026</span>
-            <h1 class="display-5 fw-bold mb-3">Tu Liga Competitiva de Juegos de Cartas Coleccionables</h1>
-            <p class="lead text-light opacity-75 mb-4">
-                Inscríbete en torneos oficiales de Magic: The Gathering, Pokémon TCG, Yu-Gi-Oh! y Dragon Ball Super. 
-                Sigue tu rendimiento, asegura tu cupo y compite por premios exclusivos.
-            </p>
-            <div class="d-flex flex-wrap gap-2">
-                <a href="{% url 'catalogo:lista' %}" class="btn btn-warning btn-lg fw-bold px-4">
-                    <i class="bi bi-calendar-check me-2"></i>Ver Calendario de Torneos
-                </a>
-                <a href="{% url 'core:nosotros' %}" class="btn btn-outline-light btn-lg px-4">
-                    <i class="bi bi-info-circle me-2"></i>Reglamento de la Liga
+<!-- Cabecera estilo Referencia TorneosTCG -->
+<div class="text-center py-4 mb-4">
+    <h1 class="display-6 fw-bold tracking-wide text-uppercase mb-2" style="letter-spacing: 1.5px;">
+        Encuentra tu próximo torneo TCG
+    </h1>
+    <div class="d-inline-flex align-items-center gap-2 mb-3">
+        <span class="badge badge-hoy">HOY</span>
+        <span class="text-secondary fw-semibold small text-uppercase">
+            {{ fecha_hoy|date:"l, d \d\e F" }} • CHILLÁN, ÑUBLE
+        </span>
+    </div>
+    <h4 class="fw-bold text-uppercase text-warning" style="letter-spacing: 2px;">
+        Los Tres Grandes en Chillán
+    </h4>
+    <p class="text-muted small">
+        Torneos y ligas oficiales en <strong>La Ira</strong>, <strong>Suna Senso</strong> y <strong>Rey Mago</strong>.
+    </p>
+</div>
+
+<!-- Grid de Los Tres Grandes (Inspirado en la imagen de referencia) -->
+<div class="row g-4 mb-5">
+    {% for grupo in tres_grandes %}
+    <div class="col-lg-4 col-md-6">
+        <div class="card h-100 card-tcg-column shadow-sm">
+            <!-- Header de Franquicia -->
+            <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom border-secondary border-opacity-25">
+                <div>
+                    <h5 class="fw-bold mb-0 text-warning">
+                        {% if "Pokémon" in grupo.franquicia.nombre %}
+                        <i class="bi bi-lightning-charge-fill text-warning me-1"></i>
+                        {% elif "One Piece" in grupo.franquicia.nombre %}
+                        <i class="bi bi-compass-fill text-danger me-1"></i>
+                        {% else %}
+                        <i class="bi bi-magic text-info me-1"></i>
+                        {% endif %}
+                        {{ grupo.franquicia.nombre }}
+                    </h5>
+                    <small class="text-muted">{{ grupo.franquicia.editorial }}</small>
+                </div>
+                <span class="badge bg-danger-subtle text-danger border border-danger-subtle small fw-bold">
+                    {{ grupo.total_torneos }} EVENTOS
+                </span>
+            </div>
+
+            <!-- Lista de Tiendas / Torneos -->
+            <div class="mb-4 flex-grow-1">
+                {% for torneo in grupo.torneos %}
+                <div class="tournament-row-item">
+                    <div>
+                        <div class="store-name">
+                            <i class="bi bi-shop text-warning small"></i>
+                            <a href="{% url 'catalogo:detalle' torneo.slug %}" class="text-decoration-none text-light fw-semibold">
+                                {{ torneo.lugar }}
+                            </a>
+                        </div>
+                        <div class="small text-muted">
+                            <span class="badge bg-secondary bg-opacity-25 text-light small me-1">{{ torneo.formato }}</span>
+                            <span>{{ torneo.fecha_evento|date:"H:i" }} hrs</span>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <span class="store-badge d-block">{{ torneo.nombre|truncatechars:18 }}</span>
+                        <a href="{% url 'catalogo:detalle' torneo.slug %}" class="btn btn-sm btn-outline-warning py-0 px-2 mt-1" style="font-size: 0.75rem;">
+                            Ver <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-4 text-muted small">
+                    <i class="bi bi-calendar-x display-6 d-block mb-2 opacity-50"></i>
+                    No hay torneos programados hoy para esta franquicia.
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Footer de la columna -->
+            <div class="mt-auto pt-3 border-top border-secondary border-opacity-25 text-center">
+                <p class="text-muted small mb-3">
+                    Mostrando torneos activos en Chillán.
+                </p>
+                <a href="{% url 'catalogo:lista' %}?franquicia={{ grupo.franquicia.slug }}" class="btn btn-outline-light btn-sm w-100 rounded-pill fw-semibold">
+                    Ver torneos de {{ grupo.franquicia.nombre }} &rarr;
                 </a>
             </div>
         </div>
-        <div class="col-lg-4 text-center d-none d-lg-block">
-            <i class="bi bi-trophy-fill text-warning" style="font-size: 8rem; opacity: 0.9;"></i>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Sedes Oficiales en Chillán -->
+<div class="card p-4 rounded-4 mb-5 border-0" style="background: linear-gradient(135deg, #181a20 0%, #1e222b 100%);">
+    <div class="row align-items-center">
+        <div class="col-lg-4 mb-3 mb-lg-0">
+            <span class="badge bg-warning text-dark fw-bold mb-2">COMUNIDAD CHILLANEJA</span>
+            <h3 class="fw-bold text-white mb-2">Nuestras Tiendas Oficiales</h3>
+            <p class="text-muted small mb-3">
+                Espacios certificados en Chillán para torneos competitivos, ligas semanales y venta de accesorios TCG.
+            </p>
+            <a href="{% url 'core:nosotros' %}" class="btn btn-warning btn-sm fw-bold px-3">
+                <i class="bi bi-geo-alt-fill me-1"></i> Conoce las sedes
+            </a>
+        </div>
+        <div class="col-lg-8">
+            <div class="row g-3">
+                {% for tienda in tiendas_chillan %}
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border border-secondary border-opacity-25 h-100 bg-dark bg-opacity-50">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <i class="bi bi-shop text-warning fs-5"></i>
+                            <h6 class="fw-bold mb-0 text-light">{{ tienda.nombre }}</h6>
+                        </div>
+                        <span class="badge bg-danger bg-opacity-25 text-danger small mb-2">{{ tienda.ciudad }}</span>
+                        <p class="text-secondary small mb-0">{{ tienda.detalle }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
@@ -31,21 +128,21 @@
 <!-- Métricas Rápidas -->
 <div class="row g-3 mb-5">
     <div class="col-md-4">
-        <div class="card border-0 shadow-sm rounded-3 bg-white p-3 text-center">
+        <div class="card p-3 text-center rounded-3">
             <div class="fs-1 fw-bold text-warning mb-1">{{ total_torneos }}</div>
-            <div class="text-muted fw-semibold">Torneos Publicados</div>
+            <div class="text-muted fw-semibold small text-uppercase">Torneos Programados en Chillán</div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card border-0 shadow-sm rounded-3 bg-white p-3 text-center">
-            <div class="fs-1 fw-bold text-primary mb-1">{{ total_franquicias }}</div>
-            <div class="text-muted fw-semibold">Juegos TCG Oficiales</div>
+        <div class="card p-3 text-center rounded-3">
+            <div class="fs-1 fw-bold text-danger mb-1">{{ total_franquicias }}</div>
+            <div class="text-muted fw-semibold small text-uppercase">Franquicias TCG Oficiales</div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card border-0 shadow-sm rounded-3 bg-white p-3 text-center">
-            <div class="fs-1 fw-bold text-success mb-1">{{ total_jugadores }}</div>
-            <div class="text-muted fw-semibold">Jugadores Registrados</div>
+        <div class="card p-3 text-center rounded-3">
+            <div class="fs-1 fw-bold text-info mb-1">{{ total_jugadores }}</div>
+            <div class="text-muted fw-semibold small text-uppercase">Jugadores Registrados</div>
         </div>
     </div>
 </div>
@@ -53,31 +150,33 @@
 <!-- Torneos Destacados / Major Events -->
 {% if torneos_destacados %}
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-bold mb-0 text-dark">
-        <i class="bi bi-star-fill text-warning me-2"></i>Torneos Destacados (Major Events)
+    <h3 class="fw-bold mb-0 text-white">
+        <i class="bi bi-star-fill text-warning me-2"></i>Torneos Destacados en Chillán
     </h3>
-    <a href="{% url 'catalogo:lista' %}" class="text-decoration-none fw-semibold">Ver todos &rarr;</a>
+    <a href="{% url 'catalogo:lista' %}" class="text-warning text-decoration-none fw-semibold">Ver todos los torneos &rarr;</a>
 </div>
 
 <div class="row g-4 mb-5">
     {% for torneo in torneos_destacados %}
     <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 rounded-3 overflow-hidden bg-white">
-            <div class="bg-dark text-white p-3 text-center position-relative" style="height: 140px; display: flex; align-items: center; justify-content: center;">
+        <div class="card h-100 rounded-3 overflow-hidden">
+            <div class="bg-dark p-3 text-center position-relative" style="height: 120px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #2a2e3a 0%, #16181e 100%);">
                 {% if torneo.afiche %}
                 <img src="{{ torneo.afiche.url }}" alt="{{ torneo.nombre }}" class="img-fluid opacity-75" style="object-fit: cover; width: 100%; height: 100%;">
                 {% else %}
-                <i class="bi bi-suit-spade text-warning display-4"></i>
+                <i class="bi bi-trophy text-warning display-4"></i>
                 {% endif %}
-                <span class="position-absolute top-0 start-0 m-2 badge bg-dark text-warning border border-warning">{{ torneo.codigo }}</span>
-                <span class="position-absolute top-0 end-0 m-2 badge bg-warning text-dark fw-bold">Major</span>
+                <span class="position-absolute top-0 start-0 m-2 badge bg-dark text-warning border border-secondary">{{ torneo.codigo }}</span>
+                <span class="position-absolute top-0 end-0 m-2 badge bg-danger text-white fw-bold">MAJOR</span>
             </div>
             <div class="card-body p-3 d-flex flex-column">
                 <span class="badge bg-secondary mb-2 align-self-start">{{ torneo.franquicia.nombre }}</span>
-                <h5 class="card-title fw-bold fs-6 mb-2">{{ torneo.nombre }}</h5>
+                <h5 class="card-title fw-bold fs-6 mb-1 text-light">{{ torneo.nombre }}</h5>
+                <p class="small text-warning mb-2"><i class="bi bi-geo-alt-fill me-1 text-danger"></i>{{ torneo.lugar }}</p>
                 <p class="small text-muted mb-2"><i class="bi bi-calendar-event me-1"></i>{{ torneo.fecha_evento|date:"d/m/Y H:i" }} hrs.</p>
-                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
-                    <span class="fw-bold text-dark fs-5">{{ torneo.precio_formateado }}</span>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary border-opacity-25">
+                    <span class="fw-bold text-warning fs-5">{{ torneo.precio_formateado }}</span>
                     {% if torneo.hay_cupos %}
                     <span class="badge bg-success-subtle text-success border border-success-subtle">Cupos: {{ torneo.cupos_disponibles }}</span>
                     {% else %}
@@ -85,7 +184,7 @@
                     {% endif %}
                 </div>
                 <div class="d-grid mt-3">
-                    <a href="{% url 'catalogo:detalle' torneo.slug %}" class="btn btn-outline-dark btn-sm">Ver Detalle</a>
+                    <a href="{% url 'catalogo:detalle' torneo.slug %}" class="btn btn-warning btn-sm fw-bold">Ver Detalle</a>
                 </div>
             </div>
         </div>
@@ -93,38 +192,4 @@
     {% endfor %}
 </div>
 {% endif %}
-
-<!-- Próximos Eventos -->
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-bold mb-0 text-dark">
-        <i class="bi bi-calendar3 me-2 text-primary"></i>Próximos Torneos en Agenda
-    </h3>
-    <a href="{% url 'catalogo:lista' %}" class="text-decoration-none fw-semibold">Explorar calendario completo &rarr;</a>
-</div>
-
-<div class="row g-3 mb-5">
-    {% for torneo in proximos_torneos %}
-    <div class="col-md-6 col-lg-4">
-        <div class="card h-100 border shadow-sm rounded-3 p-3 bg-white">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">{{ torneo.franquicia.nombre }}</span>
-                <small class="text-muted fw-bold">{{ torneo.formato }}</small>
-            </div>
-            <h6 class="fw-bold mb-1 text-truncate" title="{{ torneo.nombre }}">{{ torneo.nombre }}</h6>
-            <div class="small text-muted mb-3">
-                <i class="bi bi-clock me-1"></i>{{ torneo.fecha_evento|date:"d M, Y H:i" }} | <i class="bi bi-geo-alt me-1"></i>{{ torneo.lugar }}
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
-                <span class="fw-bold text-dark">{{ torneo.precio_formateado }}</span>
-                <a href="{% url 'catalogo:detalle' torneo.slug %}" class="btn btn-sm btn-dark">Ver Ficha</a>
-            </div>
-        </div>
-    </div>
-    {% empty %}
-    <div class="col-12 text-center py-4 bg-white rounded-3 border">
-        <p class="text-muted mb-0">No hay torneos agendados próximamente.</p>
-    </div>
-    {% endfor %}
-</div>
 {% endblock %}
-

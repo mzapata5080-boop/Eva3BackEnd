@@ -1,0 +1,254 @@
+/* ==========================================================================
+   TCG League Master CL - Dark Pokémon Theme (Charmander Red & Pikachu Yellow)
+   ========================================================================== */
+
+:root {
+    --bg-dark-primary: #0f1013;
+    --bg-dark-secondary: #181a20;
+    --bg-dark-card: #20232b;
+    --bg-dark-hover: #2a2e39;
+    --charmander-red: #ff4a22;
+    --charmander-red-hover: #e53c15;
+    --pikachu-yellow: #ffcb05;
+    --pikachu-yellow-dark: #e6b700;
+    --text-primary: #f5f6f8;
+    --text-muted: #a0a6b5;
+    --border-dark: #2d323e;
+    --border-accent: rgba(255, 203, 5, 0.25);
+}
+
+body {
+    background-color: var(--bg-dark-primary) !important;
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar-tcg {
+    background-color: var(--bg-dark-secondary) !important;
+    border-bottom: 2px solid var(--border-dark);
+}
+
+.navbar-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.region-pill {
+    background-color: rgba(255, 203, 5, 0.12);
+    border: 1px solid var(--pikachu-yellow);
+    color: var(--pikachu-yellow) !important;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: #c4c9d4 !important;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--pikachu-yellow) !important;
+}
+
+/* Headings & Texts */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+.text-dark {
+    color: var(--text-primary) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-warning-tcg {
+    color: var(--pikachu-yellow) !important;
+}
+
+.text-danger-tcg {
+    color: var(--charmander-red) !important;
+}
+
+/* Cards */
+.card, .card.bg-white {
+    background-color: var(--bg-dark-card) !important;
+    border: 1px solid var(--border-dark) !important;
+    color: var(--text-primary) !important;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    border-color: var(--border-accent) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+.card-tcg-column {
+    background-color: var(--bg-dark-card) !important;
+    border: 1px solid var(--border-dark);
+    border-radius: 18px;
+    padding: 1.5rem;
+}
+
+/* Hero Section */
+.hero-tcg {
+    background: linear-gradient(135deg, #181a20 0%, #20171a 50%, #151821 100%);
+    border: 1px solid var(--border-dark);
+    border-top: 3px solid var(--charmander-red);
+}
+
+/* Badges */
+.badge-hoy {
+    background-color: var(--charmander-red) !important;
+    color: #fff !important;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.badge-tcg-pill {
+    background: rgba(255, 203, 5, 0.15);
+    color: var(--pikachu-yellow);
+    border: 1px solid rgba(255, 203, 5, 0.4);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn-primary, .btn-charmander {
+    background-color: var(--charmander-red) !important;
+    border-color: var(--charmander-red) !important;
+    color: #fff !important;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover, .btn-charmander:hover {
+    background-color: var(--charmander-red-hover) !important;
+    border-color: var(--charmander-red-hover) !important;
+}
+
+.btn-warning, .btn-pikachu {
+    background-color: var(--pikachu-yellow) !important;
+    border-color: var(--pikachu-yellow) !important;
+    color: #121316 !important;
+    font-weight: 700;
+}
+
+.btn-warning:hover, .btn-pikachu:hover {
+    background-color: var(--pikachu-yellow-dark) !important;
+    border-color: var(--pikachu-yellow-dark) !important;
+    color: #000 !important;
+}
+
+.btn-outline-warning {
+    color: var(--pikachu-yellow) !important;
+    border-color: var(--pikachu-yellow) !important;
+}
+
+.btn-outline-warning:hover {
+    background-color: var(--pikachu-yellow) !important;
+    color: #121316 !important;
+}
+
+.btn-outline-light {
+    border-color: var(--border-dark) !important;
+    color: var(--text-primary) !important;
+}
+
+.btn-outline-light:hover {
+    background-color: var(--bg-dark-hover) !important;
+}
+
+/* Tournament Row Item in Column */
+.tournament-row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-dark);
+}
+
+.tournament-row-item:last-child {
+    border-bottom: none;
+}
+
+.store-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.store-badge {
+    color: var(--charmander-red);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Forms & Inputs */
+.form-control, .form-select {
+    background-color: var(--bg-dark-secondary) !important;
+    border: 1px solid var(--border-dark) !important;
+    color: var(--text-primary) !important;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--pikachu-yellow) !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 203, 5, 0.2) !important;
+}
+
+.form-control::placeholder {
+    color: #6c757d !important;
+}
+
+/* Tables */
+.table {
+    color: var(--text-primary) !important;
+    border-color: var(--border-dark) !important;
+}
+
+.table > :not(caption) > * > * {
+    background-color: transparent !important;
+    border-bottom-color: var(--border-dark) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    background-color: var(--bg-dark-card) !important;
+    border: 1px solid var(--border-dark) !important;
+}
+
+.dropdown-item {
+    color: var(--text-primary) !important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-dark-hover) !important;
+    color: var(--pikachu-yellow) !important;
+}
+
+/* Footer */
+footer {
+    background-color: var(--bg-dark-secondary) !important;
+    border-top: 1px solid var(--border-dark);
+    color: var(--text-muted);
+}

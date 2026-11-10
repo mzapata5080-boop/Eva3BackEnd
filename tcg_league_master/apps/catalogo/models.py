@@ -47,7 +47,7 @@ class TorneoTCG(models.Model):
     )
     formato = models.CharField(max_length=100, verbose_name="Formato de Juego (Ej: Commander, Standard, Modern, Advanced)")
     fecha_evento = models.DateTimeField(verbose_name="Fecha y Hora de Inicio")
-    lugar = models.CharField(max_length=200, default="Sucursal Central - Santiago", verbose_name="Sede / Ubicación")
+    lugar = models.CharField(max_length=200, default="Tienda La Ira - Chillán", verbose_name="Sede / Ubicación")
     
     precio_inscripcion = models.DecimalField(
         max_digits=10, 
