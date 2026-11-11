@@ -95,7 +95,7 @@ def torneo_gestion(request):
 def torneo_crear(request):
     """Formulario para publicar un nuevo torneo en la plataforma"""
     if request.method == 'POST':
-        form = TorneoTCGForm(request.POST, request.FILES)
+        form = TorneoTCGForm(request.POST)
         if form.is_valid():
             nuevo_torneo = form.save()
             messages.success(request, f"Torneo '{nuevo_torneo.nombre}' creado exitosamente.")
@@ -117,7 +117,7 @@ def torneo_editar(request, pk):
     torneo = get_object_or_404(TorneoTCG, pk=pk)
 
     if request.method == 'POST':
-        form = TorneoTCGForm(request.POST, request.FILES, instance=torneo)
+        form = TorneoTCGForm(request.POST, instance=torneo)
         if form.is_valid():
             form.save()
             messages.success(request, f"Torneo '{torneo.nombre}' actualizado correctamente.")

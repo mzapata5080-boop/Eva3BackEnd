@@ -15,7 +15,7 @@
                 </a>
             </div>
 
-            <form method="post" enctype="multipart/form-data" novalidate>
+            <form method="post" novalidate>
                 {% csrf_token %}
 
                 {% if form.non_field_errors %}
@@ -81,12 +81,6 @@
                         {{ form.estado }}
                         {% if form.estado.errors %}<div class="text-danger small">{{ form.estado.errors.0 }}</div>{% endif %}
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Afiche / Banner (Imagen)</label>
-                        {{ form.afiche }}
-                        {% if form.afiche.errors %}<div class="text-danger small">{{ form.afiche.errors.0 }}</div>{% endif %}
-                    </div>
-
                     <div class="col-12 pt-2">
                         <div class="form-check form-check-inline">
                             {{ form.destacado }}

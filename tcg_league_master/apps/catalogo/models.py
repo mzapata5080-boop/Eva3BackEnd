@@ -21,6 +21,18 @@ class FranquiciaTCG(models.Model):
     def __str__(self):
         return self.nombre
 
+    @property
+    def logo_static_path(self):
+        """Ruta del logo oficial usado en los torneos de esta franquicia."""
+        logos = {
+            'pokemon-tcg': 'images/pkmn.png',
+            'one-piece-card-game': 'images/onePiece.png',
+            'magic-the-gathering': 'images/magic.png',
+            'dragon-ball-super-card-game': 'images/dbtcg.png',
+            'yu-gi-oh-tcg': 'images/yuGiOh.png',
+        }
+        return logos.get(self.slug, 'images/dbtcg.png')
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.nombre)
@@ -63,7 +75,6 @@ class TorneoTCG(models.Model):
     cupos_disponibles = models.PositiveIntegerField(verbose_name="Cupos Disponibles")
     
     estado = models.CharField(max_length=20, choices=ESTADOS_OPERATIVOS, default='programado', verbose_name="Estado Operativo")
-    afiche = models.ImageField(upload_to="torneos/", blank=True, null=True, verbose_name="Afiche / Banner del Evento")
     destacado = models.BooleanField(default=False, verbose_name="¿Evento Destacado / Major?")
     activo = models.BooleanField(default=True, verbose_name="¿Publicado / Visible?")
     

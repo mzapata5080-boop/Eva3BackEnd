@@ -34,6 +34,6 @@ class TorneoTCGAdmin(admin.ModelAdmin):
             'fields': ('fecha_evento', 'lugar', 'precio_inscripcion', 'cupos_maximos', 'cupos_disponibles')
         }),
         ('Estado Operativo y Presentación', {
-            'fields': ('estado', 'afiche', 'destacado', 'activo')
+            'fields': ('estado', 'destacado', 'activo')
         }),
     )

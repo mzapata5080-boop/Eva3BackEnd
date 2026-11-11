@@ -8,7 +8,7 @@ class TorneoTCGForm(forms.ModelForm):
         fields = [
             'codigo', 'nombre', 'franquicia', 'formato', 'fecha_evento', 
             'lugar', 'precio_inscripcion', 'cupos_maximos', 'cupos_disponibles', 
-            'estado', 'afiche', 'destacado', 'activo'
+            'estado', 'destacado', 'activo'
         ]
         widgets = {
             'codigo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. MTG-CMD-01'}),
@@ -21,7 +21,6 @@ class TorneoTCGForm(forms.ModelForm):
             'cupos_maximos': forms.NumberInput(attrs={'class': 'form-control', 'min': 4}),
             'cupos_disponibles': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
             'estado': forms.Select(attrs={'class': 'form-select'}),
-            'afiche': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'destacado': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'activo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
