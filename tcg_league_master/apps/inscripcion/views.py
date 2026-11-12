@@ -36,7 +36,6 @@ def inscripcion_agregar(request, id):
     if str_id in inscripciones:
         messages.info(request, f"Ya tienes pre-reservado un cupo para '{torneo.nombre}'.")
     else:
-        afiche_url = torneo.afiche.url if torneo.afiche else ''
         inscripciones[str_id] = {
             'id': torneo.id,
             'codigo': torneo.codigo,
@@ -47,13 +46,12 @@ def inscripcion_agregar(request, id):
             'precio': int(torneo.precio_inscripcion),
             'jugadores': 1,
             'subtotal': int(torneo.precio_inscripcion),
-            'afiche_url': afiche_url,
             'fecha': torneo.fecha_evento.strftime('%d/%m/%Y %H:%M'),
         }
         request.session.modified = True
         messages.success(request, f"Te has pre-inscrito temporalmente a '{torneo.nombre}'.")
 
-    return redirect(request.META.get('HTTP_REFERER') or 'inscripcion:ver')
+    return redirect('inscripcion:ver')
 
 
 def inscripcion_eliminar(request, id):
